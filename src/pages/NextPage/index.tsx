@@ -1,27 +1,35 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
 import { Card } from "../../components/Card"
 import { Footer } from "../../components/Footer"
 import { Header } from "../../components/Header"
 import { List } from "../../components/List"
-import { HomePageContainer, HomePageStyles } from "./styles"
 import Pagination from "@mui/material/Pagination";
 import { CharacterContext } from "../../providers/CharacterProvider"
-import {  Navigate } from "react-router-dom"
+import { HomePageContainer, HomePageStyles } from "../HomePage/styles"
+import { useNavigate, useParams, Navigate } from "react-router-dom"
 
-export const HomePage = () => {
+export const NextPage = () => {
   const { getCharacter, characters, setPage, totalPage } = useContext(CharacterContext);
-  const [nextPage, setNexPage] = useState<number | null>(null)
-  const onChange = (page: number) => {
-    setNexPage(page)
-  }
+  const navigate = useNavigate();
 
+  const { id } = useParams();
   useEffect(() => {
-    getCharacter("1");
+    if(id){
+        getCharacter(id);
+    }
+ 
   }, []);
+  useEffect(() => {
+    if(id){
+        getCharacter(id);
+    }
+ 
+  }, [id]);
 
-  if(nextPage){
-    return <Navigate to={`page/${nextPage}`}/>;
-  }
+ if(id == "1"){
+    return <Navigate to="/" />
+ }
+
 return (
     <>
     <HomePageStyles>
@@ -36,10 +44,11 @@ return (
         <Pagination
           count={totalPage}
           color="primary"
+          page={parseInt(id!)}
           onChange={(e, page) => {
             e.preventDefault();
             setPage(page.toLocaleString())
-            onChange(page)
+            navigate(`/page/${page}`)
           }}
         />
     </HomePageStyles>
