@@ -73,13 +73,22 @@ align-items: center;
 text-transform: capitalize;
 font-size: 16px;
 font-weight: 500;
+cursor: pointer;
 `
 
-export const CardStatusIcon = styled.span`
+export const CardStatusIcon = styled.span.attrs<{ foo?: number, status: string }>({ foo: 1 })`
 height: 0.5rem;
 width: 0.5rem;
 margin-right: 0.375rem;
-background: rgb(214, 61, 46);
+background: ${props => {
+    if(props.status === "Alive"){
+        return "rgb(85, 204, 68);"
+    }
+    if(props.status === "Dead"){
+        return "rgb(214, 61, 46);"
+    }
+    return "rgb(211,211,211)"
+}};
 border-radius: 50%;
 `
 
@@ -95,6 +104,7 @@ font-weight: 500;
 export const CardInfoParagraph = styled.p`
 color: rgb(245, 245, 245);
 font-size: 1rem;
+cursor: pointer;
 &:hover{
     color: rgb(255, 152, 0);
 }
