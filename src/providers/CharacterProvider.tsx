@@ -39,10 +39,11 @@ results: ICharacter[]
 
 
 export interface ICharacterContext {
-getCharacter: () => void;
+getCharacter: (id: string) => void;
 characters: ICharacter[];
-setPage: React.Dispatch<React.SetStateAction<number>>;
-totalPage: number
+setPage: React.Dispatch<React.SetStateAction<string>>;
+totalPage: number;
+page: string
 }
 
 export const CharacterContext = createContext({} as ICharacterContext);
@@ -50,7 +51,7 @@ export const CharacterContext = createContext({} as ICharacterContext);
 const CharacterProvider = ({ children }: ListProvaiderProps) => {
     const [characters, setCharacters] = useState<ICharacter[]>([])
     const [newData, setNewData] = useState<IData | null>(null)
-    const [page, setPage] = useState<number>(1)
+    const [page, setPage] = useState<string>("1")
     const [totalPage, setTotalPage] = useState<number>(1)
     useEffect(() => {
         if(newData){
@@ -61,9 +62,11 @@ const CharacterProvider = ({ children }: ListProvaiderProps) => {
     }, [newData])
 
 
-const getCharacter = async () => {
+const getCharacter = async (id: string) => {
     try {
-      const {data} = await api.get(`/character?page=${page}`);
+      
+      const {data} = await api.get(`/character?page=${id}`);
+      setPage(id)
       setNewData(data)
 
     } catch (error) {
@@ -78,7 +81,8 @@ const getCharacter = async () => {
         getCharacter,
         characters,
         setPage,
-        totalPage
+        totalPage,
+        page
       }}
     >
       {children}
