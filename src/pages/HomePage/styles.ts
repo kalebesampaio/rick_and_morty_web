@@ -3,6 +3,16 @@ import styled from "styled-components";
 export const HomePageStyles = styled.div`
 width: 100%;
 padding: 0px 1.5rem;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+button {
+    color: var(--whiteFixed);
+  }
+  nav{
+    margin-bottom: 20px;
+  }
 `
 
 export const HomePageContainer = styled.main`

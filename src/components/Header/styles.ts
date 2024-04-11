@@ -8,13 +8,15 @@ justify-content: center;
 -webkit-box-align: center;
 align-items: center;
 flex-direction: column;
-height: calc(-60px + 50vh);
+
 text-align: center;
+
 @media (max-width: 650px) {
-    margin-top: 0px;
+    margin-top: 50px;
 }
 `
 
 export const HeaderLogo = styled.img`
 width: 100%;
+object-fit: cover;
 `
