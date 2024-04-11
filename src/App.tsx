@@ -1,11 +1,10 @@
-import { Card } from "./components/Card"
-import { List } from "./components/List"
+import { HomePage } from "./pages/HomePage"
 
 export const App = () =>{
 
   return (
-    <List>
-    <Card/>
-    </List>
+ 
+    <HomePage/>
+
   )
 }
