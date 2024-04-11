@@ -1,34 +1,43 @@
 import { CardImage, CardInfoContainer, CardInfoItem, CardInfoList, CardInfoLocation, CardInfoParagraph, CardInfoStatus, CardStatusIcon, CardStyles, CardTitle } from "./styles"
 
-export const Card = () => {
+interface Props {
+    image: string; 
+    name: string;
+    status: string; 
+    species: string; 
+    origin: string; 
+    location: string;
+}
+
+export const Card = ({image, name, status, species, origin, location }: Props) => {
     return <CardStyles>
         <figure>
-            <CardImage src="https://rickandmortyapi.com/api/character/avatar/154.jpeg" alt="Imagem do personagem" />
+            <CardImage src={image} alt="Imagem do personagem" />
         </figure>
         <CardInfoList>
         <CardInfoContainer>
             <CardInfoItem>
-                <CardTitle>Hamurai</CardTitle>
+                <CardTitle>{name}</CardTitle>
             </CardInfoItem>
             <CardInfoItem>
                 <CardInfoStatus>
-                    <CardStatusIcon/>
-                     Dead - Alien
+                    <CardStatusIcon status={status}/>
+                     {status} - {species}
                 </CardInfoStatus>
             </CardInfoItem>
         </CardInfoContainer>
         <CardInfoContainer>
             <CardInfoLocation>
-            Last known location:
+            Última localização conhecida:
             </CardInfoLocation>
-            <CardInfoParagraph>Earth (Replacement Dimension)</CardInfoParagraph>
+            <CardInfoParagraph>{location}</CardInfoParagraph>
         </CardInfoContainer>
 
         <CardInfoContainer>
             <CardInfoLocation>
-            First seen in:
+            Planeta de origem:
             </CardInfoLocation>
-            <CardInfoParagraph>Total Rickall</CardInfoParagraph>
+            <CardInfoParagraph>{origin}</CardInfoParagraph>
         </CardInfoContainer>
         </CardInfoList>
        
