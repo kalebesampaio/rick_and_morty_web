@@ -1,10 +1,12 @@
+import { RouterMain } from "./routes"
+import GlobalStyles from "./styles/GlobalStyles"
 
-const App = () =>{
+export const App = () =>{
 
   return (
     <>
+     <GlobalStyles />
+    <RouterMain />
     </>
   )
 }
-
-export default App
