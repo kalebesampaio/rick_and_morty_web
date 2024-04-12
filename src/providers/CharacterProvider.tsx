@@ -73,6 +73,7 @@ const getCharacter = async (id: string) => {
       setLoading(false)
 
     } catch (error) {
+      setLoading(false)
       console.error(error);
     }
   };

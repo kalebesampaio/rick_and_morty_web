@@ -8,6 +8,7 @@ import Pagination from "@mui/material/Pagination";
 import { CharacterContext } from "../../providers/CharacterProvider"
 import {  Navigate } from "react-router-dom"
 import { Loading } from "../../components/Loading"
+import { NotFound } from "../../components/NotFound"
 
 export const HomePage = () => {
   const { getCharacter, characters, setPage, totalPage, loading } = useContext(CharacterContext);
@@ -28,11 +29,13 @@ return (
     <HomePageStyles>
         <Header/>
         <HomePageContainer>
-          {loading ? <Loading/> : (
+        {loading ? <Loading/> : (
             <List>
-            {characters.map((char) => <Card key={char.id} image={char.image} name={char.name} 
+            {characters.length === 0 ? <NotFound/> : (
+              characters.map((char) => <Card key={char.id} image={char.image} name={char.name} 
             status={char.status} species={char.species} origin={char.origin.name} 
-            location={char.location.name} />)}         
+            location={char.location.name} />)
+            )}         
           </List>
           )}
 
